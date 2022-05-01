@@ -1,0 +1,45 @@
+import { useState } from "react";
+import Image from "next/image";
+
+import { motion } from "framer-motion";
+import cls from "classnames";
+
+import styles from "./Card.module.css";
+
+const Card = ({
+  id,
+  imgUrl = "/static/movie-placeholder.jpg",
+  size = "medium",
+}) => {
+  const [imgSrc, setImgSrc] = useState(imgUrl);
+  const classMap = {
+    large: styles.lgItem,
+    medium: styles.mdItem,
+    small: styles.smItem,
+  };
+
+  const onImageErrorHandler = () => {
+    setImgSrc("/static/movie-placeholder.jpg");
+  };
+
+  const scale = id === 0 ? { scaleY: 1.1 } : { scale: 1.1 };
+  return (
+    <div className={styles.container}>
+      <motion.div
+        className={cls(styles.imgMotionWrapper, classMap[size])}
+        whileHover={{ ...scale }}
+      >
+        <Image
+          className={styles.cardImg}
+          src={imgSrc}
+          alt="image"
+          layout="fill"
+          onError={onImageErrorHandler}
+          objectFit="cover"
+        />
+      </motion.div>
+    </div>
+  );
+};
+
+export default Card;

@@ -1,8 +1,37 @@
 import Head from "next/head";
 import Image from "next/image";
+import Banner from "../components/banner/Banner";
+import NavBar from "../components/nav-bar/NavBar";
+import SectionCards from "../components/card/SectionCards";
+
+import { getVideos, getPopularVideos } from "../lib/videos";
+
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export async function getServerSideProps() {
+  const bangtanVideos = await getVideos("bts music video");
+  const maplestoryVideos = await getVideos("maplestory official");
+  const pokemonVideos = await getVideos("pokemon official");
+  const genshinVideos = await getVideos("genshin impact official");
+  const popularVideos = await getPopularVideos();
+  return {
+    props: {
+      bangtanVideos,
+      maplestoryVideos,
+      pokemonVideos,
+      genshinVideos,
+      popularVideos,
+    },
+  };
+}
+
+export default function Home({
+  bangtanVideos,
+  maplestoryVideos,
+  pokemonVideos,
+  genshinVideos,
+  popularVideos,
+}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +40,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Netflix</h1>
+      <div className={styles.main}>
+        <NavBar username="Kim Seokjin" />
+        <Banner
+          title="hii"
+          subTitle="hello"
+          imgUrl="https://3.bp.blogspot.com/-D4A2FNoQNlc/XLJFeDw-S7I/AAAAAAAAFSc/Tfjy4rm6z2wOQ-11Inj5Mg0Nxz0j99HlQCKgBGAs/w5120-h2880-c/bts-map-of-the-soul-persona-members-uhdpaper.com-4K-71.jpg"
+        />
+
+        <div className={styles.sectionWrapper}>
+          <SectionCards title="BTS" videos={bangtanVideos} size="large" />
+          <SectionCards
+            title="Maplestory"
+            videos={maplestoryVideos}
+            size="small"
+          />
+          <SectionCards title="Pokemon" videos={pokemonVideos} size="medium" />
+          <SectionCards
+            title="Genshin Impact"
+            videos={genshinVideos}
+            size="small"
+          />
+          <SectionCards title="Popular" videos={popularVideos} size="small" />
+        </div>
+      </div>
     </div>
   );
 }
