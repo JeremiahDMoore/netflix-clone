@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Banner from "../components/banner/Banner";
 import NavBar from "../components/nav-bar/NavBar";
 import SectionCards from "../components/card/SectionCards";
@@ -41,8 +40,9 @@ export default function Home({
       </Head>
 
       <div className={styles.main}>
-        <NavBar username="Kim Seokjin" />
+        <NavBar />
         <Banner
+          videoId="gdZLi9oWNZg"
           title="hii"
           subTitle="hello"
           imgUrl="https://3.bp.blogspot.com/-D4A2FNoQNlc/XLJFeDw-S7I/AAAAAAAAFSc/Tfjy4rm6z2wOQ-11Inj5Mg0Nxz0j99HlQCKgBGAs/w5120-h2880-c/bts-map-of-the-soul-persona-members-uhdpaper.com-4K-71.jpg"

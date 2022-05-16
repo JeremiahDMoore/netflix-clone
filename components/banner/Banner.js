@@ -1,10 +1,13 @@
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 import styles from "./Banner.module.css";
 
-const Banner = ({ title, subTitle, imgUrl }) => {
+const Banner = ({ title, subTitle, imgUrl, videoId }) => {
+  const router = useRouter();
   const onPlayHandler = () => {
     console.log("Hi.");
+    router.push(`video/${videoId}`);
   };
   return (
     <div className={styles.container}>
