@@ -12,18 +12,6 @@ function MyApp({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const redirectIfLoggedIn = async () => {
-      const isLoggedIn = await magic.user.isLoggedIn();
-      if (isLoggedIn) {
-        router.push("/");
-      } else {
-        router.push("/login");
-      }
-    };
-    redirectIfLoggedIn();
-  }, []);
-
-  useEffect(() => {
     const completeRouteChangeHandler = () => {
       setIsLoading(false);
     };

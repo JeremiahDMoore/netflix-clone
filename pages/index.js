@@ -16,15 +16,6 @@ export async function getServerSideProps(context) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { userId, token } = await useRedirectUser(context);
 
-  if (!userId) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
   const bangtanVideos = await getVideos("bts music video");
   const maplestoryVideos = await getVideos("maplestory official");
   const pokemonVideos = await getVideos("pokemon official");
